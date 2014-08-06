@@ -1,0 +1,180 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>ShopApp</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="shopApp">
+    <!-- Add your site or application content here -->
+    <header class="navbar navbar-inverse navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="#" class="navbar-brand" style="display: none">ShopApp</a>
+            </div>
+            
+            <div class="collapse navbar-collapse"
+                id="bs-example-navbar-collapse-1"
+                ng-controller="MenuCtrl"
+                bs-navbar>
+
+                <ul class="nav navbar-nav navbar">
+                    <li data-match-route="/product" ng-show="isLoggedIn()">
+                        <a href="#/product">
+                            Produk
+                        </a>
+                    </li>
+
+                    <li data-match-route="/supplier" ng-show="isLoggedIn()">
+                        <a href="#/supplier">
+                            Pemasok
+                        </a>
+                    </li>
+
+                    <li data-match-route="/customer" ng-show="isLoggedIn()">
+                        <a href="#/customer">
+                            Pelanggan
+                        </a>
+                    </li>
+
+                    <li data-match-route="/purchase-invoice((/\d+)|(/print/\d+)*)$" ng-show="isLoggedIn()">
+                        <a href="#/purchase-invoice">
+                            Faktur Beli
+                        </a>
+                    </li>
+
+                    <li data-match-route="/purchase-invoice/create" ng-show="isLoggedIn()">
+                        <a href="#/purchase-invoice/create">
+                            Transaksi Pembelian
+                        </a>
+                    </li>
+
+                    <li data-match-route="/sales-invoice((/\d+)|(/print/\d+)*)$" ng-show="isLoggedIn()">
+                        <a href="#/sales-invoice">
+                            Faktur Jual
+                        </a>
+                    </li>
+
+
+                    <li data-match-route="/sales-invoice/create" ng-show="isLoggedIn()">
+                        <a href="#/sales-invoice/create">
+                            Transaksi Penjualan
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-match-route="/user"  ng-show="isLoggedIn()">
+                        <a ng-href="#/user">User</a>
+                    </li>
+                    <li data-match-route="/login" ng-hide="isLoggedIn()">
+                        <a ng-href="#/login">Login</a>
+                    </li>
+                    <li ng-show="isLoggedIn()">
+                        <a href ng-click="logout()">Logout</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="container" ng-view=""></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!--
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+    -->
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+
+        <!-- product -->
+        <script src="modules/product/controller.js"></script>
+        <script src="modules/product/service.js"></script>
+        <!-- end-product -->
+
+        <!-- supplier -->
+        <script src="modules/supplier/controller.js"></script>
+        <script src="modules/supplier/service.js"></script>
+        <!-- end-supplier -->
+
+        <!-- customer -->
+        <script src="modules/customer/controller.js"></script>
+        <script src="modules/customer/service.js"></script>
+        <!-- end-customer -->
+
+        <!-- purchase-invoice -->
+        <script src="modules/purchase-invoice/controller.js"></script>
+        <script src="modules/purchase-invoice/service.js"></script>
+        <!-- end-purchase-invoice -->
+
+        <!-- sales-invoice -->
+        <script src="modules/sales-invoice/controller.js"></script>
+        <script src="modules/sales-invoice/service.js"></script>
+        <!-- end-sales-invoice -->
+
+        <!-- user -->
+        <script src="modules/user/controller.js"></script>
+        <script src="modules/user/service.js"></script>
+        <!-- end-user -->
+
+        <script src="scripts/controllers/menu.js"></script>
+        <script src="scripts/directives/bsnavbar.js"></script>
+        <script src="scripts/directives/form-control.js"></script>
+        <script src="scripts/services/credential.js"></script>
+        <script src="scripts/services/counter.js"></script>
+        <script src="scripts/services/filter.js"></script>
+        <script src="scripts/services/log.js"></script>
+        <script src="scripts/services/datefilter.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,92 @@
+<div class="search-box-container">
+    <div class="search-box">
+        <input type="text" placeholder="Cari kode, nama, atau pemasok" ng-model="keyword"></input>
+    </div>
+
+    <div class="dropdown btn-group pull-right">
+         <button type="button"
+            class="btn btn-default"
+            data-toggle="dropdown">
+            Tambah
+        </button>
+
+        <button type="button"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+
+        <div class="dropdown-menu"
+            style="width: 450px"
+            ng-include="'modules/product/views/create.html'">
+        </div>
+    </div>
+</div>
+
+<br />
+<ol class="breadcrumb">
+    <li style="color: rgb(18, 116, 18)">
+        <strong>Transaksi Pembelian:</strong> {{ purchaseValue | currency:'Rp' }}
+    </li>
+    <li style="color: #AD6D10">
+        <strong>Transaksi Penjualan:</strong> {{ salesValue | currency:'Rp' }}
+    </li>
+    <li style="color: #357ebd" ng-show="salesValue > purchaseValue">
+        <strong>Keuntungan:</strong> {{ salesValue - purchaseValue | currency:'Rp' }}
+    </li>
+    <li style="color: #d43f3a" ng-hide="salesValue > purchaseValue">
+        <strong>Kerugian:</strong> {{ purchaseValue - salesValue | currency:'Rp' }}
+    </li>
+</ol>
+
+<table class="table table-bordered table-striped table-hover" ng-show="countAvailability()">
+    <thead>
+        <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Pemasok</th>
+            <th>Stok</th>
+            <th>Harga Modal</th>
+            <th>Harga Jual</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="product in products | filter:keyword | orderBy:'created_at':true">
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.supplier.name }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.buyPrice | currency:'Rp' }}</td>
+            <td>{{ product.sellPrice | currency:'Rp' }}</td>
+            <td>
+                <a class="label-btn label-info" ng-href="#/product/{{ product.id }}">Edit</a>
+                <a class="label-btn label-danger" href ng-click="remove(product.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+
+    <!-- <tfoot>
+        <td colspan="6">
+            <div class="pagination">
+                <ul>
+                    <li ng-class="{disabled: table.currentPage == 0}">
+                        <a href ng-click="table.prevPage()">Prev</a>
+                    </li>
+
+                    <li ng-repeat="n in range(products.length)" ng-class="{active: n == currentPage" ng-click="setPage()">
+                        <a href ng-bind="n + 1">1</a>
+                    </li>
+
+                    <li ng-class="{disabled: table.currentPage == table.pagedItems.length - 1}">
+                        <a href ng-click="table.nextPage()">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tfoot> -->
+</table>
+
+<div ng-hide="countAvailability()">
+    <p class="text-muted">Data tidak ada</p>
+</div>

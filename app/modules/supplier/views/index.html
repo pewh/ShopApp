@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Cari nama" ng-model="keyword"></input>
+    </div>
+
+    <div class="dropdown btn-group pull-right">
+        <button type="button"
+            class="btn btn-default"
+            data-toggle="dropdown">
+            Tambah
+        </button>
+
+        <button type="button"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+    
+        <div class="dropdown-menu"
+            style="width: 450px"
+            ng-include="'modules/supplier/views/create.html'">
+        </div>
+    </div>
+</div>
+
+<br />
+
+<table class="table table-bordered table-striped" ng-show="countAvailability()">
+    <thead>
+        <tr>
+            <th>Nama Pemasok</th>
+            <th>Alamat</th>
+            <th>Kontak</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="supplier in suppliers | filter:keyword">
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.address }}</td>
+            <td>{{ supplier.contact }}</td>
+            <td>
+                <a ng-href="#/supplier/{{ supplier.id }}" class="label label-info no-underline">Edit</a>
+                <a href="javascript:"
+                    class="label label-danger no-underline"
+                    ng-click="remove(supplier.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-hide="countAvailability()">
+    <p class="text-muted">Data tidak ada</p>
+</div>

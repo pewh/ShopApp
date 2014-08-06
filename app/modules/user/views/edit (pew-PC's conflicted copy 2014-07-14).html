@@ -1,0 +1,46 @@
+<form ng-submit="update()" class="form-horizontal">
+    <div class="form-group">
+        <label for="username" class="control-label col-sm-2">Username</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="username"
+                class="form-control"
+                ng-model="user.username"
+                autocomplete="off"
+                required
+                autofocus />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="control-label col-sm-2">Password</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="password"
+                class="form-control"
+                ng-model="user.password"
+                autocomplete="off"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="role" class="control-label col-sm-2">Jabatan</label>
+        <div class="col-sm-4">
+            <select
+                id="role"
+                class="form-control"
+                ng-model="user.role"
+                ng-options="role.id as role.name for role in roles"
+                required>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <input type="submit" class="btn btn-info" value="Update" />
+            <a href="javascript:" class="btn btn-default" ng-click="cancel()">Cancel</a>
+        </div>
+    </div>
+</form>

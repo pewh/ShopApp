@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Cari nama" ng-model="keyword"></input>
+    </div>
+
+    <div class="dropdown btn-group pull-right">
+        <button type="button"
+            class="btn btn-default"
+            data-toggle="dropdown">
+            Tambah
+        </button>
+
+        <button type="button"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+    
+        <div class="dropdown-menu"
+            style="width: 450px"
+            ng-include="'modules/user/views/create.html'">
+        </div>
+    </div>
+</div>
+
+<br />
+
+<table class="table table-bordered table-striped" ng-show="countAvailability()">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Hak Akses</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | filter:keyword">
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.role ? 'Admin' : 'Karyawan' }}</td>
+            <td>
+                <a ng-href="#/user/{{ user.id }}" class="label label-info no-underline">Edit</a>
+                <a href="javascript:"
+                    class="label label-danger no-underline"
+                    ng-click="remove(user.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-hide="countAvailability()">
+    <p class="text-muted">Data tidak ada</p>
+</div>

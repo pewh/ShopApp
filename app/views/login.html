@@ -1,0 +1,24 @@
+<div class="row">
+	<form ng-submit="login()" class="form-signin col-sm-4 col-sm-offset-4">
+		<h2 class="form-signin-heading">Please sign in</h2>
+
+		<input type="text"
+			class="form-control"
+			placeholder="Username"
+			ng-model="username"
+			required
+			autofocus />
+
+		<input type="password"
+			class="form-control"
+			placeholder="Password"
+			ng-model="password"
+			required />
+
+		<!-- <label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label> -->
+		<br />
+		<button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+	</form>
+</div>

@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Cari faktur" ng-model="keyword">
+    </div>
+
+    <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="fromDate" data-max-date="{{untilDate}}" placeholder="From" data-date-format="dd-MM-yyyy" bs-datepicker>
+    </div>
+
+    <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="untilDate" data-min-date="{{fromDate}}" placeholder="Until" data-date-format="dd-MM-yyyy" bs-datepicker>
+    </div>
+</div>
+
+<br />
+
+<table id="invoice-accordion" class="table table-bordered" ng-show="countAvailability()">
+    <thead>
+        <tr>
+            <th>Tanggal</th>
+            <th>No Faktur</th>
+            <th>Pemasok</th>
+            <th>Total Qty</th>
+            <th>Total Harga</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody  ng-repeat="purchaseInvoice in purchaseInvoices | filter:keyword | daterange:fromDate:untilDate | orderBy:'datetime':true">
+        
+        <!-- invoice -->
+        <tr class="tes" 
+            data-toggle="collapse"
+            data-target="#invoice-{{purchaseInvoice.id}}">
+            <td>{{ purchaseInvoice.datetime | date:'dd MMM y hh:mm:ss' }}</td>
+            <td>{{ purchaseInvoice.code }}</td>
+            <td>{{ purchaseInvoice.supplier.name }}</td>
+            <td>{{ purchaseInvoice.totalQuantities }}</td>
+            <td>{{ purchaseInvoice.totalPriceAfterDiscount | currency:'Rp' }}</td>
+            <td>
+                <a ng-href="#/purchase-invoice/{{ purchaseInvoice.id }}" class="label label-info no-underline">Edit</a>
+                <a ng-click="print(purchaseInvoice.id)" class="label label-success no-underline">Cetak</a>
+                <a href class="label label-danger no-underline" ng-click="remove(purchaseInvoice.id)">Delete</a>
+            </td>
+        </tr>
+
+        <!-- invoice detail -->
+        <tr>
+            <td class="hidden-row"></td>
+
+            <td colspan="4" class="hidden-row">
+                <section id="invoice-{{purchaseInvoice.id}}" class="collapse">
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Barang</th>
+                                <th>Harga Jual</th>
+                                <th>Qty</th>
+                                <th>Harga Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="detail in purchaseInvoice.details">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ detail.product.name }}</td>
+                                <td>{{ detail.product.buyPrice | currency:'Rp' }}</td>
+                                <td>{{ detail.quantity }}</td>
+                                <td>{{ detail.totalPrice | currency:'Rp' }}</td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" class="align-right">TOTAL</th>
+                                <th>{{ purchaseInvoice.totalQuantities }}</th>
+                                <th>{{ purchaseInvoice.totalPriceBeforeDiscount | currency:'Rp' }}</th>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3" class="align-right">
+                                    GRAND TOTAL
+                                    (Disc. {{ purchaseInvoice.discount }}%)
+                                </th>
+                                <th></th>
+                                <th>{{ purchaseInvoice.totalPriceAfterDiscount | currency:'Rp' }}</th>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </section>
+
+            </td>
+
+            <td class="hidden-row"></td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div ng-hide="countAvailability()">
+    <p class="text-muted">Data tidak ada</p>
+</div>

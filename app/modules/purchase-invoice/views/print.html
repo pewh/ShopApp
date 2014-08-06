@@ -1,0 +1,56 @@
+<table id="invoice-accordion" class="table table-bordered">
+    <tr>
+      <th>Tanggal</th>
+      <td>{{ purchaseInvoice.datetime | date:'dd MMM y hh:mm:ss' }}</td>
+    </tr>
+
+    <tr>
+      <th>No Faktur</th>
+      <td>{{ purchaseInvoice.code }}</td>
+    </tr>
+
+    <tr>
+      <th>Pemasok</th>
+      <td>{{ purchaseInvoice.supplier.name }}</td>
+    </tr>
+</table>
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Barang</th>
+            <th>Harga</th>
+            <th>Qty</th>
+            <th>Harga Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="detail in purchaseInvoice.details">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ detail.product.name }}</td>
+            <td>{{ detail.product.buyPrice | currency:'Rp' }}</td>
+            <td>{{ detail.quantity }}</td>
+            <td>{{ detail.totalPrice | currency:'Rp' }}</td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <th colspan="3" class="align-right">TOTAL</th>
+            <th>{{ purchaseInvoice.totalQuantities }}</th>
+            <th>{{ purchaseInvoice.totalPriceBeforeDiscount | currency:'Rp' }}</th>
+        </tr>
+
+        <tr>
+            <th colspan="3" class="align-right">
+                GRAND TOTAL
+                (Disc. {{ purchaseInvoice.discount }}%)
+            </th>
+            <th></th>
+            <th>{{ purchaseInvoice.totalPriceAfterDiscount | currency:'Rp' }}</th>
+        </tr>
+    </tfoot>
+</table>

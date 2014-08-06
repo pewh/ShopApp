@@ -1,0 +1,43 @@
+<form ng-submit="update()" class="form-horizontal">
+    <div class="form-group">
+        <label for="name" class="control-label col-sm-2">Nama</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="name"
+                class="form-control"
+                ng-model="customer.name"
+                autocomplete="off"
+                required
+                autofocus />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="address" class="control-label col-sm-2">Alamat</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="address"
+                class="form-control"
+                ng-model="customer.address"
+                autocomplete="off" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="contact" class="control-label col-sm-2">Kontak</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="contact"
+                class="form-control"
+                ng-model="customer.contact"
+                autocomplete="off" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <input type="submit" class="btn btn-info" value="Update" />
+            <a href="javascript:" class="btn btn-default" ng-click="cancel()">Cancel</a>
+        </div>
+    </div>
+</form>

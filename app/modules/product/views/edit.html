@@ -1,0 +1,83 @@
+<form ng-submit="update()" class="form-horizontal">
+    <div class="form-group">
+        <label for="code" class="control-label col-sm-2">Kode</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="code"
+                class="form-control"
+                ng-model="product.code"
+                autocomplete="off"
+                required
+                autofocus />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-sm-2">Nama</label>
+        <div class="col-sm-4">
+            <input type="text"
+                id="name"
+                class="form-control"
+                ng-model="product.name"
+                autocomplete="off"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="supplier" class="control-label col-sm-2">Pemasok</label>
+        <div class="col-sm-4">
+            <select
+                id="supplier"
+                class="form-control"
+                ng-model="product.supplier.id"
+                ng-options="supplier.id as supplier.name for supplier in suppliers"
+                required />
+        </div>
+    </div>
+
+<!--     <div class="form-group">
+        <label for="stock" class="control-label col-sm-2">Stok</label>
+        <div class="col-sm-4">
+            <input type="number"
+                id="stock"
+                class="form-control"
+                ng-model="product.stock"
+                min="1"
+                required />
+        </div>
+    </div> -->
+
+    <div class="form-group">
+        <label for="buy-price" class="control-label col-sm-2">Harga Modal</label>
+        <div class="col-sm-4">
+            <input type="number"
+                id="buy-price"
+                class="form-control"
+                ng-model="product.buyPrice"
+                value="{{product.buyPrice}}"
+                min="1"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sell-price" class="control-label col-sm-2">Harga Jual</label>
+        <div class="col-sm-4">
+            <input type="number"
+                id="sell-price"
+                class="form-control"
+                ng-model="product.sellPrice"
+                value="{{product.sellPrice}}"
+                min="1"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <input type="submit" class="btn btn-info" value="Update" />
+            <a href="javascript:" class="btn btn-default" ng-click="cancel()">Cancel</a>
+        </div>
+    </div>
+</form>

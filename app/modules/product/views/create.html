@@ -1,0 +1,83 @@
+<form ng-submit="create()" class="form-horizontal">
+    <div class="form-group">
+        <label for="code" class="control-label col-sm-3">Kode</label>
+        <div class="col-sm-8">
+            <input type="text"
+                id="code"
+                class="form-control"
+                ng-model="newProduct.code"
+                autocomplete="off"
+                required
+                autofocus />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-sm-3">Nama</label>
+        <div class="col-sm-8">
+            <input type="text"
+                id="name"
+                class="form-control"
+                ng-model="newProduct.name"
+                autocomplete="off"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="supplier" class="control-label col-sm-3">Pemasok</label>
+        <div class="col-sm-8">
+            <select
+                id="supplier"
+                class="form-control"
+                ng-model="newProduct.supplier"
+                ng-options="supplier.name for supplier in suppliers"
+                required>
+                <option value="" disabled>-- Pilih Pemasok --</option>
+            </select>
+        </div>
+    </div>
+<!-- 
+    <div class="form-group">
+        <label for="stock" class="control-label col-sm-3">Stok</label>
+        <div class="col-sm-8">
+            <input type="number"
+                id="stock"
+                class="form-control"
+                ng-model="newProduct.stock"
+                min="1"
+                required />
+        </div>
+    </div> -->
+
+    <div class="form-group">
+        <label for="buy-price" class="control-label col-sm-3">Harga Modal</label>
+        <div class="col-sm-8">
+            <input type="number"
+                id="buy-price"
+                class="form-control"
+                ng-model="newProduct.buyPrice"
+                min="1"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sell-price" class="control-label col-sm-3">Harga Jual</label>
+        <div class="col-sm-8">
+            <input type="number"
+                id="sell-price"
+                class="form-control"
+                ng-model="newProduct.sellPrice"
+                min="1"
+                required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-8">
+            <input type="submit" class="btn btn-info" value="Save" />
+            <input type="reset" class="btn btn-default" value="Reset" />
+        </div>
+    </div>
+</form>
